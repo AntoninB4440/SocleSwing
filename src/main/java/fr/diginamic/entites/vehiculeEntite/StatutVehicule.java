@@ -1,4 +1,4 @@
-package fr.diginamic.entites.vehicule;
+package fr.diginamic.entites.vehiculeEntite;
 
 public enum StatutVehicule {
 
@@ -15,7 +15,7 @@ public enum StatutVehicule {
 		// TODO Auto-generated method stub
 		StatutVehicule[] listStatuts = StatutVehicule.values();
 		for (StatutVehicule statut : listStatuts) {
-			if (statut.getStatut().equals(statut)) {
+			if (statut.getStatut().equals(string)) {
 				return statut;
 			}
 		}

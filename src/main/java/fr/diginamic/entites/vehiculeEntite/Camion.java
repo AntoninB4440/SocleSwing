@@ -1,4 +1,4 @@
-package fr.diginamic.entites.vehicule;
+package fr.diginamic.entites.vehiculeEntite;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package fr.diginamic.entites.vehicule;
+package fr.diginamic.entites.vehiculeEntite;
 
 import java.util.ArrayList;
 import java.util.List;

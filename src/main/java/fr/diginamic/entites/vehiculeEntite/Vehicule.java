@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import fr.diginamic.entites.reservationEntite.Reservation;
+
 @Entity
 @Table(name = "vehicule")
 public class Vehicule {

@@ -1,14 +1,3 @@
-CREATE TABLE Vehicule(
-   Id_Vehicule COUNTER,
-   marque_vehicule VARCHAR(255) NOT NULL,
-   modele_vehicule VARCHAR(255) NOT NULL,
-   statut_vehicule VARCHAR(255) NOT NULL,
-   immatriculation_vehicule VARCHAR(11) NOT NULL,
-   kilometrage_vehicule VARCHAR(50),
-   PRIMARY KEY(Id_Vehicule),
-   UNIQUE(immatriculation_vehicule)
-);
-
 CREATE TABLE Paiement(
    Id_Paiement COUNTER,
    mode_paiement VARCHAR(255) NOT NULL,
@@ -53,16 +42,6 @@ CREATE TABLE Type_Camion(
    UNIQUE(nom_type_camion)
 );
 
-CREATE TABLE Maintenance(
-   Id_Maintenance COUNTER,
-   date_debut_maintenance DATE NOT NULL,
-   date_fin_maintenance DATE NOT NULL,
-   cout_maintenance DECIMAL(15,2) NOT NULL,
-   Id_Vehicule INT NOT NULL,
-   PRIMARY KEY(Id_Maintenance),
-   FOREIGN KEY(Id_Vehicule) REFERENCES Vehicule(Id_Vehicule)
-);
-
 CREATE TABLE Statut_Facture(
    Id_Statut_Facture COUNTER,
    statut_facture VARCHAR(255) NOT NULL,
@@ -76,6 +55,25 @@ CREATE TABLE Agence(
    tresorerie_agence DECIMAL(15,2) NOT NULL,
    PRIMARY KEY(Id_Agence),
    UNIQUE(nom_agence)
+);
+
+CREATE TABLE Statut_Vehicule(
+   Id_Statut_Vehicule COUNTER,
+   nom_statut_vehicule VARCHAR(255) NOT NULL,
+   PRIMARY KEY(Id_Statut_Vehicule),
+   UNIQUE(nom_statut_vehicule)
+);
+
+CREATE TABLE Vehicule(
+   Id_Vehicule COUNTER,
+   marque_vehicule VARCHAR(255) NOT NULL,
+   modele_vehicule VARCHAR(255) NOT NULL,
+   immatriculation_vehicule VARCHAR(11) NOT NULL,
+   kilometrage_vehicule VARCHAR(50),
+   Id_Statut_Vehicule INT NOT NULL,
+   PRIMARY KEY(Id_Vehicule),
+   UNIQUE(immatriculation_vehicule),
+   FOREIGN KEY(Id_Statut_Vehicule) REFERENCES Statut_Vehicule(Id_Statut_Vehicule)
 );
 
 CREATE TABLE Client(
@@ -117,6 +115,16 @@ CREATE TABLE Permis(
    UNIQUE(numero_permis),
    FOREIGN KEY(Id_Client) REFERENCES Client(Id_Client),
    FOREIGN KEY(Id_Type_permis) REFERENCES Type_Permis(Id_Type_permis)
+);
+
+CREATE TABLE Maintenance(
+   Id_Maintenance COUNTER,
+   date_debut_maintenance DATE NOT NULL,
+   date_fin_maintenance DATE NOT NULL,
+   cout_maintenance DECIMAL(15,2) NOT NULL,
+   Id_Vehicule INT NOT NULL,
+   PRIMARY KEY(Id_Maintenance),
+   FOREIGN KEY(Id_Vehicule) REFERENCES Vehicule(Id_Vehicule)
 );
 
 CREATE TABLE Facture(

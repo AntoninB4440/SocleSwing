@@ -12,12 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import fr.diginamic.dao.IDmodel;
 import fr.diginamic.entites.clientEntite.Client;
 import fr.diginamic.entites.vehiculeEntite.Vehicule;
 
 @Entity
 @Table(name = "reservation")
-public class Reservation {
+public class Reservation implements IDmodel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

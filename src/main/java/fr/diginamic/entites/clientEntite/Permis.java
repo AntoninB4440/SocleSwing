@@ -10,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import fr.diginamic.dao.IDmodel;
+
 @Entity
 @Table(name = "permis")
-public class Permis {
+public class Permis implements IDmodel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

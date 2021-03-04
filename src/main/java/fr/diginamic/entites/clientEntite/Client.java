@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import fr.diginamic.entites.reservationEntite.Reservation;
 
 @Entity
-@Table(name = "permis")
+@Table(name = "client")
 public class Client {
 
 	@Id

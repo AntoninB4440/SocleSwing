@@ -69,13 +69,12 @@ public class Reservation {
 	 * @param kilometrageDebutVehicule
 	 */
 	public Reservation(LocalDate dateDebutReservation, LocalDate dateFinPrevuReservation, Client clientReservation,
-			Vehicule vehiculeReservation, int kilometrageDebutVehicule) {
+			Vehicule vehiculeReservation) {
 		super();
 		this.dateDebutReservation = dateDebutReservation;
 		this.dateFinPrevuReservation = dateFinPrevuReservation;
 		this.clientReservation = clientReservation;
 		this.vehiculeReservation = vehiculeReservation;
-		this.kilometrageDebutVehicule = kilometrageDebutVehicule;
 	}
 
 	/**

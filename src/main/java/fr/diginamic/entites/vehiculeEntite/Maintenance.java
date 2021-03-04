@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +29,10 @@ public class Maintenance {
 	@Column(name = "cout_maintenance")
 	private Double coutMaintenance;
 
+	@ManyToOne
+	@JoinColumn(name = "ID_VEHICULE", nullable = false)
+	private Vehicule vehiculeMaintenance;
+
 	/**
 	 * 
 	 */
@@ -37,9 +43,10 @@ public class Maintenance {
 	/**
 	 * @param dateDebutMaintenance
 	 */
-	public Maintenance(LocalDate dateDebutMaintenance) {
+	public Maintenance(LocalDate dateDebutMaintenance, Vehicule vehiculeMaintenance) {
 		super();
 		this.dateDebutMaintenance = dateDebutMaintenance;
+		this.vehiculeMaintenance = vehiculeMaintenance;
 	}
 
 	/**
@@ -96,6 +103,20 @@ public class Maintenance {
 	 */
 	public void setCoutMaintenance(Double coutMaintenance) {
 		this.coutMaintenance = coutMaintenance;
+	}
+
+	/**
+	 * @return the vehiculeMaintenance
+	 */
+	public Vehicule getVehiculeMaintenance() {
+		return vehiculeMaintenance;
+	}
+
+	/**
+	 * @param vehiculeMaintenance the vehiculeMaintenance to set
+	 */
+	public void setVehiculeMaintenance(Vehicule vehiculeMaintenance) {
+		this.vehiculeMaintenance = vehiculeMaintenance;
 	}
 
 }

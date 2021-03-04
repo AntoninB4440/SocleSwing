@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +29,8 @@ public class TypeCamion {
 	@Column(name = "nom_type_camion", nullable = false)
 	private Double cautionTypeCamion;
 
-	private List<Camion> camions = new ArrayList<>();
+	@OneToMany(mappedBy = "typeCamion")
+	private List<Camion> camions = new ArrayList<Camion>();
 
 	/**
 	 * 

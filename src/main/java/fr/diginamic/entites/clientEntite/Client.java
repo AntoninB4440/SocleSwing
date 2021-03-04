@@ -35,7 +35,7 @@ public class Client {
 	private Adresse adresseClient;
 
 	@OneToOne
-	@JoinColumn(name = "ID_PERMIS")
+	@JoinColumn(name = "ID_PERMIS", nullable = false)
 	private Permis permisClient;
 
 	@OneToMany(mappedBy = "clientReservation")

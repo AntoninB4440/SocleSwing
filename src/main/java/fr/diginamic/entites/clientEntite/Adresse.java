@@ -6,22 +6,22 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Adresse {
 
-	@Column(name = "numero_adresse")
+	@Column(name = "numero_adresse", nullable = false)
 	private Short numeroAdresse;
 
-	@Column(name = "rue_adresse", length = 255)
+	@Column(name = "rue_adresse", length = 255, nullable = false)
 	private String rueAdresse;
 
-	@Column(name = "code_postal_adresse")
+	@Column(name = "code_postal_adresse", nullable = false)
 	private Integer codePostalAdresse;
 
-	@Column(name = "ville_adresse", length = 255)
+	@Column(name = "ville_adresse", length = 255, nullable = false)
 	private String villeAdresse;
 
-	@Column(name = "telephone_adresse", length = 10)
+	@Column(name = "telephone_adresse", length = 10, nullable = false)
 	private int telephoneAdresse;
 
-	@Column(name = "email_adresse", length = 255)
+	@Column(name = "email_adresse", length = 255, nullable = false, unique = true)
 	private String emailAdresse;
 
 	/**

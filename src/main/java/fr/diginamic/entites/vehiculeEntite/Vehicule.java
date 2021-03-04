@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import fr.diginamic.entites.reservationEntite.Reservation;
@@ -39,8 +40,10 @@ public class Vehicule {
 	@Column(name = "kilometrage_vehicule", nullable = false, length = 11)
 	private int kilometrageVehicule;
 
+	@OneToMany
 	private List<Maintenance> maintenanceVehicule = new ArrayList();
 
+	@OneToMany(mappedBy = "vehiculeReservation")
 	private List<Reservation> reservationVehicule = new ArrayList();
 
 	/**

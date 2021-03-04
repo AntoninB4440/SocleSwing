@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +20,7 @@ public class Facture {
 	@Column(name = "ID")
 	private Long id;
 
-	@Column(name = "numero_facture", nullable = false)
+	@Column(name = "numero_facture", nullable = false, unique = true)
 	private int numeroFacture;
 
 	@Column(name = "cout_facture", nullable = false)
@@ -26,6 +28,10 @@ public class Facture {
 
 	@Column(name = "nom_client_facture", nullable = false)
 	private String nomClient;
+
+	@OneToOne
+	@JoinColumn(name = "ID_reservation")
+	private Reservation reservationFacture;
 
 	@Column(name = "statut_facture", length = 255, nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -46,12 +52,14 @@ public class Facture {
 	 * @param numeroFacture
 	 * @param coutFacture
 	 * @param nomClient
+	 * @param reservationFacture
 	 */
-	public Facture(int numeroFacture, Double coutFacture, String nomClient) {
+	public Facture(int numeroFacture, Double coutFacture, String nomClient, Reservation reservationFacture) {
 		super();
 		this.numeroFacture = numeroFacture;
 		this.coutFacture = coutFacture;
 		this.nomClient = nomClient;
+		this.reservationFacture = reservationFacture;
 	}
 
 	/**
@@ -108,6 +116,20 @@ public class Facture {
 	 */
 	public void setNomClient(String nomClient) {
 		this.nomClient = nomClient;
+	}
+
+	/**
+	 * @return the reservationFacture
+	 */
+	public Reservation getReservationFacture() {
+		return reservationFacture;
+	}
+
+	/**
+	 * @param reservationFacture the reservationFacture to set
+	 */
+	public void setReservationFacture(Reservation reservationFacture) {
+		this.reservationFacture = reservationFacture;
 	}
 
 	/**

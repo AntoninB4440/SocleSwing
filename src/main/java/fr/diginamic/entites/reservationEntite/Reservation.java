@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import fr.diginamic.entites.clientEntite.Client;
@@ -35,12 +36,16 @@ public class Reservation {
 	@Column(name = "date_fin_reel_reservation")
 	private LocalDate dateFinReelReservation;
 
+	@OneToOne
+	@JoinColumn(name = "ID_FACTURE")
 	private Facture reservationFacture;
 
 	@ManyToOne
-	@JoinColumn(name = "ID_CLIENT")
+	@JoinColumn(name = "ID_CLIENT", nullable = false)
 	private Client clientReservation;
 
+	@ManyToOne
+	@JoinColumn(name = "ID_VEHICULE", nullable = false)
 	private Vehicule vehiculeReservation;
 
 	@Column(name = "kilometrage_debut_reservation", nullable = false)

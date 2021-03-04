@@ -11,9 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import fr.diginamic.dao.IDmodel;
+
 @Entity
 @Table(name = "maintenance")
-public class Maintenance {
+public class Maintenance implements IDmodel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

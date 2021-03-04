@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import fr.diginamic.entites.clientEntite.Client;
 import fr.diginamic.entites.vehiculeEntite.Vehicule;
 
 @Entity

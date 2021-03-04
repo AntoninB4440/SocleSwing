@@ -49,7 +49,7 @@ public class Reservation {
 	private Vehicule vehiculeReservation;
 
 	@Column(name = "kilometrage_debut_reservation", nullable = false)
-	private int kilometrageDebutVehicule = vehiculeReservation.getKilometrageVehicule();
+	private int kilometrageDebutVehicule;
 
 	@Column(name = "commentaire_vehicule_reservation", length = 255)
 	private String commentaireVehiculeReservation;

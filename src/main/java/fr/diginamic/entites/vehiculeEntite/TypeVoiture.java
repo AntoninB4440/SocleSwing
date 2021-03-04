@@ -26,7 +26,7 @@ public class TypeVoiture {
 	@Column(name = "prix_journalier_type_voiture", nullable = false)
 	private Double prixJournalierTypeVoiture;
 
-	@Column(name = "nom_type_voiture", nullable = false)
+	@Column(name = "caution_type_voiture", nullable = false)
 	private Double cautionTypeVoiture;
 
 	@OneToMany(mappedBy = "typeVoiture")

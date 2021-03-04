@@ -4,21 +4,21 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import fr.diginamic.composants.ui.Selectable;
 
-public class Vehicule implements Selectable {
+public class VehiculeExemple implements Selectable {
 
 	private Long id;
 	private String immatriculation;
 	private String marque;
 	private String modele;
 	
-	public Vehicule(String immatriculation, String marque, String modele) {
+	public VehiculeExemple(String immatriculation, String marque, String modele) {
 		super();
 		this.immatriculation = immatriculation;
 		this.marque = marque;
 		this.modele = modele;
 	}
 
-	public Vehicule(Long id, String immatriculation, String marque, String modele) {
+	public VehiculeExemple(Long id, String immatriculation, String marque, String modele) {
 		super();
 		this.id = id;
 		this.immatriculation = immatriculation;
@@ -28,10 +28,10 @@ public class Vehicule implements Selectable {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof Vehicule)) {
+		if (!(obj instanceof VehiculeExemple)) {
 			return false;
 		}
-		Vehicule autre = (Vehicule)obj;
+		VehiculeExemple autre = (VehiculeExemple)obj;
 		return new EqualsBuilder().append(id, autre.getId()).isEquals();
 	}
 

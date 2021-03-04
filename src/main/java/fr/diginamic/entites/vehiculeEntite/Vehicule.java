@@ -24,7 +24,7 @@ public class Vehicule {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
+	@Column(name = "ID_vehicule")
 	private Long id;
 
 	@Column(name = "statut_vehicule", length = 255)

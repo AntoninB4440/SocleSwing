@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +28,8 @@ public class Client {
 	@Embedded
 	private Adresse adresseClient;
 
+	@OneToOne
+	@JoinColumn(name = "ID_PERMIS")
 	private Permis permisClient;
 
 	/**
@@ -41,12 +45,11 @@ public class Client {
 	 * @param adresseClient
 	 * @param permisClient
 	 */
-	public Client(String nomClient, String prenomClient, Adresse adresseClient, Permis permisClient) {
+	public Client(String nomClient, String prenomClient, Adresse adresseClient) {
 		super();
 		this.nomClient = nomClient;
 		this.prenomClient = prenomClient;
 		this.adresseClient = adresseClient;
-		this.permisClient = permisClient;
 	}
 
 	/**

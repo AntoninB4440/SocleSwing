@@ -35,7 +35,7 @@ public class Client {
 	private Adresse adresseClient;
 
 	@OneToOne
-	@JoinColumn(name = "ID_PERMIS", nullable = false)
+	@JoinColumn(name = "ID_PERMIS")
 	private Permis permisClient;
 
 	@OneToMany(mappedBy = "clientReservation")
@@ -54,12 +54,11 @@ public class Client {
 	 * @param adresseClient
 	 * @param permisClient
 	 */
-	public Client(String nomClient, String prenomClient, Adresse adresseClient, Permis permisClient) {
+	public Client(String nomClient, String prenomClient, Adresse adresseClient) {
 		super();
 		this.nomClient = nomClient;
 		this.prenomClient = prenomClient;
 		this.adresseClient = adresseClient;
-		this.permisClient = permisClient;
 	}
 
 	/**

@@ -7,7 +7,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,8 +29,7 @@ public class Permis {
 	@Enumerated(EnumType.STRING)
 	private TypePermis typePermis;
 
-	@OneToOne
-	@JoinColumn(name = "ID_CLIENT")
+	@OneToOne(mappedBy = "permisClient")
 	private Client client;
 
 	/**

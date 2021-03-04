@@ -1,6 +1,8 @@
 package fr.diginamic;
 
+import fr.diginamic.dao.vehiculeentitedao.VehiculeDao;
 import fr.diginamic.database.DatabaseAccess;
+import fr.diginamic.entites.vehiculeEntite.Vehicule;
 
 public class TestConnection {
 
@@ -8,6 +10,15 @@ public class TestConnection {
 		// TODO Auto-generated method stub
 
 		DatabaseAccess.getEntityManager();
+
+		VehiculeDao vehiculeDao = new VehiculeDao();
+
+		Vehicule vehicule1 = new Vehicule("mercedeces", "Classe A", "AGC-654-ZHD", 0);
+		Vehicule vehicule2 = new Vehicule("BMW", "AMG564", "AGC-844-ZHD", 0);
+
+		vehiculeDao.create(vehicule1);
+		vehiculeDao.create(vehicule2);
+		vehiculeDao.findAll().forEach(vehicule -> System.out.println(vehicule.getMarqueVehicule()));
 	}
 
 }

@@ -7,7 +7,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,8 +28,7 @@ public class Facture {
 	@Column(name = "nom_client_facture", nullable = false)
 	private String nomClient;
 
-	@OneToOne
-	@JoinColumn(name = "ID_reservation")
+	@OneToOne(mappedBy = "reservationFacture")
 	private Reservation reservationFacture;
 
 	@Column(name = "statut_facture", length = 255, nullable = false)

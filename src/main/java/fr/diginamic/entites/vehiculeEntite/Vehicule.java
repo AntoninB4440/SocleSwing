@@ -15,12 +15,13 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import fr.diginamic.dao.IDmodel;
 import fr.diginamic.entites.reservationEntite.Reservation;
 
 @Entity
 @Table(name = "vehicule")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Vehicule {
+public class Vehicule implements IDmodel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

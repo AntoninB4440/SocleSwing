@@ -1,20 +1,20 @@
-package fr.diginamic.entites.vehiculeEntite;
+package fr.diginamic.entites.reservationEntite;
 
-public enum StatutVehicule {
+public enum StatutFacture {
 
-	DISPONIBLE("displonible"), LOUE("loue"), MAINTENANCE("maintenance");
+	NONPAYE("non paye"), PAYE("paye");
 
 	private String statut;
 
-	StatutVehicule(String statut) {
+	StatutFacture(String statut) {
 		// TODO Auto-generated constructor stub
 		this.statut = statut;
 	}
 
-	public static StatutVehicule find(String string) {
+	public static StatutFacture find(String string) {
 		// TODO Auto-generated method stub
-		StatutVehicule[] listStatuts = StatutVehicule.values();
-		for (StatutVehicule statut : listStatuts) {
+		StatutFacture[] listStatuts = StatutFacture.values();
+		for (StatutFacture statut : listStatuts) {
 			if (statut.getStatut().equals(string.toLowerCase())) {
 				return statut;
 			}
@@ -35,5 +35,4 @@ public enum StatutVehicule {
 	public void setStatut(String statut) {
 		this.statut = statut;
 	}
-
 }

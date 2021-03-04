@@ -14,11 +14,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import fr.diginamic.dao.IDmodel;
 import fr.diginamic.entites.reservationEntite.Reservation;
 
 @Entity
 @Table(name = "client")
-public class Client {
+public class Client implements IDmodel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

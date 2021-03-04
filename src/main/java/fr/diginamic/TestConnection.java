@@ -1,6 +1,6 @@
 package fr.diginamic;
 
-import fr.diginamic.dao.vehiculeentitedao.VehiculeDao;
+import fr.diginamic.dao.vehiculeEntiteDao.VehiculeDao;
 import fr.diginamic.database.DatabaseAccess;
 import fr.diginamic.entites.vehiculeEntite.Vehicule;
 

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import fr.diginamic.entites.clientEntite.Client;
@@ -35,6 +37,8 @@ public class Reservation {
 
 	private Facture reservationFacture;
 
+	@ManyToOne
+	@JoinColumn(name = "ID_CLIENT")
 	private Client clientReservation;
 
 	private Vehicule vehiculeReservation;

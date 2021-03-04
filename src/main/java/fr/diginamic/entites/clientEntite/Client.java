@@ -1,5 +1,8 @@
 package fr.diginamic.entites.clientEntite;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -7,8 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import fr.diginamic.entites.reservationEntite.Reservation;
 
 @Entity
 @Table(name = "permis")
@@ -32,6 +38,9 @@ public class Client {
 	@JoinColumn(name = "ID_PERMIS")
 	private Permis permisClient;
 
+	@OneToMany(mappedBy = "clientReservation")
+	private List<Reservation> reservationsClient = new ArrayList<Reservation>();
+
 	/**
 	 * 
 	 */
@@ -45,11 +54,12 @@ public class Client {
 	 * @param adresseClient
 	 * @param permisClient
 	 */
-	public Client(String nomClient, String prenomClient, Adresse adresseClient) {
+	public Client(String nomClient, String prenomClient, Adresse adresseClient, Permis permisClient) {
 		super();
 		this.nomClient = nomClient;
 		this.prenomClient = prenomClient;
 		this.adresseClient = adresseClient;
+		this.permisClient = permisClient;
 	}
 
 	/**
@@ -120,6 +130,20 @@ public class Client {
 	 */
 	public void setPermisClient(Permis permisClient) {
 		this.permisClient = permisClient;
+	}
+
+	/**
+	 * @return the reservationsClient
+	 */
+	public List<Reservation> getReservationsClient() {
+		return reservationsClient;
+	}
+
+	/**
+	 * @param reservationsClient the reservationsClient to set
+	 */
+	public void setReservationsClient(List<Reservation> reservationsClient) {
+		this.reservationsClient = reservationsClient;
 	}
 
 }

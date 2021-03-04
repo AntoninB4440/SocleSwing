@@ -16,9 +16,9 @@ public class TestConnection {
 		Vehicule vehicule1 = new Vehicule("mercedeces", "Classe A", "AGC-654-ZHD", 0);
 		Vehicule vehicule2 = new Vehicule("BMW", "AMG564", "AGC-844-ZHD", 0);
 
-		vehiculeDao.create(vehicule1);
-		vehiculeDao.create(vehicule2);
-		vehiculeDao.findAll().forEach(vehicule -> System.out.println(vehicule.getMarqueVehicule()));
+//		vehiculeDao.create(vehicule1);
+//		vehiculeDao.create(vehicule2);
+//		vehiculeDao.findAll().forEach(vehicule -> System.out.println(vehicule.getMarqueVehicule()));
 	}
 
 }

@@ -56,6 +56,8 @@ public class ListeVehiculeService extends MenuService {
 
 		// On ajoute au formulaire les champs nécessaire
 		if (v.getReservationVehicule().isEmpty()) {
+			form.addInput(new TextField("Marque vehicule : ", "champMarque", v.getMarqueVehicule(), false));
+			form.addInput(new TextField("Marque vehicule : ", "champModele", v.getModeleVehicule(), false));
 			form.addInput(new TextField("Immatriculation : ", "champImma", v.getImmatriculationVehicule()));
 
 		}
@@ -73,6 +75,18 @@ public class ListeVehiculeService extends MenuService {
 
 		}
 
+	}
+
+	public void supprimer(Long id) {
+		boolean result = console.confirm("Suppression de l'item " + id,
+				"Confirmez-vous la suppression de l'item n°" + id);
+		// console.println("" + result);
+		if (result) {
+			Vehicule vehiculeDelete = vehiculeDao.findById(id);
+			vehiculeDao.delete(vehiculeDelete);
+
+			traitement();
+		}
 	}
 
 }

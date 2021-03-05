@@ -12,12 +12,16 @@ import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.ui.Selectable;
 import fr.diginamic.composants.ui.TextField;
 import fr.diginamic.dao.vehiculeEntiteDao.CamionDao;
+import fr.diginamic.dao.vehiculeEntiteDao.TypeCamionDao;
+import fr.diginamic.dao.vehiculeEntiteDao.TypeVoitureDao;
 import fr.diginamic.dao.vehiculeEntiteDao.VehiculeDao;
 import fr.diginamic.dao.vehiculeEntiteDao.VoitureDao;
 import fr.diginamic.database.DatabaseAccess;
+import fr.diginamic.entites.vehiculeEntite.Camion;
 import fr.diginamic.entites.vehiculeEntite.TypeCamion;
 import fr.diginamic.entites.vehiculeEntite.TypeVoiture;
 import fr.diginamic.entites.vehiculeEntite.Vehicule;
+import fr.diginamic.entites.vehiculeEntite.Voiture;
 import fr.diginamic.service.utils.VehiculeUtils.VehiculeUtils;
 
 public class ListeVehiculeService extends MenuService {
@@ -27,6 +31,8 @@ public class ListeVehiculeService extends MenuService {
 	private VehiculeDao vehiculeDao = new VehiculeDao();
 	private VoitureDao voitureDao = new VoitureDao();
 	private CamionDao camionDao = new CamionDao();
+	private TypeVoitureDao typeVoitureDao = new TypeVoitureDao();
+	private TypeCamionDao typeCamionDao = new TypeCamionDao();
 
 	@Override
 	public void traitement() {
@@ -34,6 +40,13 @@ public class ListeVehiculeService extends MenuService {
 
 		TypedQuery<Vehicule> query = em.createQuery("SELECT v from Vehicule v", Vehicule.class);
 		List<Vehicule> vehicules = query.getResultList();
+		for (Vehicule vehicule : vehicules) {
+			if (vehicule instanceof Voiture) {
+				Voiture v = (Voiture) vehicule;
+			} else if (vehicule instanceof Camion) {
+				Camion c = (Camion) vehicule;
+			}
+		}
 
 		console.clear();
 		console.print("<h1 class='bg-green'><center>Liste des véhicules</center></h1>");
@@ -78,9 +91,8 @@ public class ListeVehiculeService extends MenuService {
 
 		Form form2 = new Form();
 
-		if (valide) {
-
-			System.out.println("HELLO");
+		/// AJOUT D'UNE VOITURE
+		if (valide && form.getValue("typeVehicule").equals("1")) {
 
 			form2.addInput(new TextField("Nombre de place :", "champNbPlace"));
 
@@ -94,22 +106,63 @@ public class ListeVehiculeService extends MenuService {
 
 			form2.addInput(new ComboBox("Liste type voiture: ", "typeVoiture", typeVoiture, typeVoiture.get(0)));
 
-			ListeTypeVehiculeFormValidator validator2 = new ListeTypeVehiculeFormValidator();
+			VoitureFormValidator validator2 = new VoitureFormValidator();
 
 			boolean valide2 = console.input("Ajout d'un type de voiture", form2, validator2);
 
 			if (valide2) {
-				String typeCamion = form.getValue("champType");
-				String prixJourna = form.getValue("champPrix");
-				String prixCaution = form.getValue("champCaution");
+				String marqueVoiture = form.getValue("champMarque");
+				String modeleVoiture = form.getValue("champModele");
+				String immatriculation = form.getValue("champImma");
+				int kilometrageVoiture = Integer.parseInt(form.getValue("champKilo"));
+				Short nombrePlace = Short.parseShort(form2.getValue("champNbPlace"));
+				TypeVoiture typeVoitureCree = typeVoitureDao.findById(Long.parseLong(form2.getValue("typeVoiture")));
 
-				TypeCamion typeCamionCree = new TypeCamion(typeCamion, Double.parseDouble(prixJourna),
-						Double.parseDouble(prixCaution));
+				Voiture voitureCree = new Voiture(marqueVoiture, modeleVoiture, immatriculation, kilometrageVoiture,
+						typeVoitureCree, nombrePlace);
+
+				voitureDao.create(voitureCree);
 
 				traitement();
 
 			}
 
+		}
+		// AJOUT D'UN CAMION
+		else if (valide && form.getValue("typeVehicule").equals("2")) {
+
+			form2.addInput(new TextField("Volume du camion :", "champVolume"));
+
+			TypedQuery<TypeCamion> query = em.createQuery("SELECT tc from TypeCamion tc", TypeCamion.class);
+			List<TypeCamion> listTypeCamions = query.getResultList();
+
+			List<Selectable> typeCamion = new ArrayList<>();
+			for (TypeCamion listTypeCamion : listTypeCamions) {
+				typeCamion.add(listTypeCamion);
+			}
+
+			form2.addInput(new ComboBox("Liste type camion: ", "typeCamion", typeCamion, typeCamion.get(0)));
+
+			CamionFormValidator validator2 = new CamionFormValidator();
+
+			boolean valide2 = console.input("Ajout d'un type de camion", form2, validator2);
+
+			if (valide2) {
+				String marqueVoiture = form.getValue("champMarque");
+				String modeleVoiture = form.getValue("champModele");
+				String immatriculation = form.getValue("champImma");
+				int kilometrageVoiture = Integer.parseInt(form.getValue("champKilo"));
+				Short volume = Short.parseShort(form2.getValue("champVolume"));
+				TypeCamion typeCamionCree = typeCamionDao.findById(Long.parseLong(form2.getValue("typeCamion")));
+
+				Camion camionCree = new Camion(marqueVoiture, modeleVoiture, immatriculation, kilometrageVoiture,
+						typeCamionCree, volume);
+
+				camionDao.create(camionCree);
+
+				traitement();
+
+			}
 		}
 	}
 
@@ -125,6 +178,8 @@ public class ListeVehiculeService extends MenuService {
 			form.addInput(new TextField("Marque vehicule : ", "champMarque", v.getMarqueVehicule(), false));
 			form.addInput(new TextField("Marque vehicule : ", "champModele", v.getModeleVehicule(), false));
 			form.addInput(new TextField("Immatriculation : ", "champImma", v.getImmatriculationVehicule()));
+			form.addInput(
+					new TextField("kilometrage : ", "champKilo", Integer.toString(v.getKilometrageVehicule()), false));
 
 		}
 

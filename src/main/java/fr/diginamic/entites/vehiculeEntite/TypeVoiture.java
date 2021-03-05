@@ -11,11 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import fr.diginamic.composants.ui.Selectable;
 import fr.diginamic.dao.IDmodel;
 
 @Entity
 @Table(name = "type_voiture")
-public class TypeVoiture implements IDmodel {
+public class TypeVoiture implements IDmodel, Selectable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +52,11 @@ public class TypeVoiture implements IDmodel {
 		this.nomTypeVoiture = nomTypeVoiture;
 		this.prixJournalierTypeVoiture = prixJournalierTypeVoiture;
 		this.cautionTypeVoiture = cautionTypeVoiture;
+	}
+
+	@Override
+	public String toString() {
+		return nomTypeVoiture;
 	}
 
 	/**

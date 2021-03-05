@@ -40,29 +40,48 @@ public class ListeVehiculeService extends MenuService {
 
 		TypedQuery<Vehicule> query = em.createQuery("SELECT v from Vehicule v", Vehicule.class);
 		List<Vehicule> vehicules = query.getResultList();
-		for (Vehicule vehicule : vehicules) {
-			if (vehicule instanceof Voiture) {
-				Voiture v = (Voiture) vehicule;
-			} else if (vehicule instanceof Camion) {
-				Camion c = (Camion) vehicule;
-			}
-		}
 
 		console.clear();
 		console.print("<h1 class='bg-green'><center>Liste des véhicules</center></h1>");
 
 		String html = "<table class='table' cellspacing=0>"
-				+ "<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Marque</td><td>Model</td><td>Kilometrage</td><td>Immatriculation</td><td>Statut</td></tr>";
+				+ "<tr class='bg-green'>"
+				+ "		<td>&nbsp;</td>"
+				+ "		<td>&nbsp;</td>"
+				+ "		<td>Marque</td>"
+				+ "		<td>Modele</td>"
+				+ "		<td>Kilometrage</td>"
+				+ "		<td>Immatriculation</td>"
+				+ "		<td>Statut</td>"
+				+ "		<td>Type</td>"
+				+ "</tr>";
 
-		for (Vehicule v : vehicules) {
-			html += "<tr>" + "  <td><a class='btn-blue' href='modifier(" + v.getId()
-					+ ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
-					+ "  <td><a class='btn-red' href='supprimer(" + v.getId()
-					+ ")'><img width=25 src='images/trash-red-xs.png'></a></td>" + "  <td width='150px'>"
-					+ v.getMarqueVehicule() + "</td>" + "  <td width='150px'>" + v.getModeleVehicule() + "</td>"
-					+ "  <td width='150px'>" + v.getKilometrageVehicule() + "</td>" + "  <td width='150px'>"
-					+ v.getImmatriculationVehicule() + "</td>" + "  <td width='150px'>" + v.getStatutVehicule()
-					+ "</td>" + "</tr>";
+		for (Vehicule vehicule : vehicules) {
+			if (vehicule instanceof Voiture) {
+				Voiture v = (Voiture) vehicule;
+				html += "<tr> "
+						+ "	<td><a class='btn-blue' href='modifier(" + v.getId() + ")'<img width=25 src ='images/pencil-blue-xs.png'></a></td>"
+						+ " <td><a class='btn-red' href='modifier(" + v.getId() + ")'<img width=25 src ='images/trash-red-xs.png'></a></td>"
+						+ " <td width='150px'>" + v.getMarqueVehicule() + "</td>"
+						+ " <td width='150px'>" + v.getModeleVehicule() + "</td>"
+						+ " <td width='150px'>" + v.getKilometrageVehicule() + "</td>"
+						+ " <td width='150px'>" + v.getImmatriculationVehicule() + "</td>"
+						+ " <td width='150px'>" + v.getStatutVehicule()+ "</td>"
+						+ " <td width='150px'>" + v.getTypeVoiture().getNomTypeVoiture()+ "</td>"
+					+ "</tr>";
+			} else if (vehicule instanceof Camion) {
+				Camion c = (Camion) vehicule;
+				html += "<tr> "
+						+ "	<td><a class='btn-blue' href='modifier(" + c.getId() + ")'<img width=25 src ='images/pencil-blue-xs.png'></a></td>"
+						+ " <td><a class='btn-red' href='modifier(" + c.getId() + ")'<img width=25 src ='images/trash-red-xs.png'></a></td>"
+						+ " <td width='150px'>" + c.getMarqueVehicule() + "</td>"
+						+ " <td width='150px'>" + c.getModeleVehicule() + "</td>"
+						+ " <td width='150px'>" + c.getKilometrageVehicule() + "</td>"
+						+ " <td width='150px'>" + c.getImmatriculationVehicule() + "</td>"
+						+ " <td width='150px'>" + c.getStatutVehicule()+ "</td>"
+						+ " <td width='150px'>" + c.getTypeCamion().getNomTypeCamion()+ "</td>"
+					+ "</tr>";
+			}
 		}
 
 		html += "</table>";

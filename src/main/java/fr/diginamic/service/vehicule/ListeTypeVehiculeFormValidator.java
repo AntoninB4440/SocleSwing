@@ -3,16 +3,16 @@ package fr.diginamic.service.vehicule;
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.validator.FormValidator;
 
-public class ListeTypeCamionFormValidator extends FormValidator {
+public class ListeTypeVehiculeFormValidator extends FormValidator {
 
 	@Override
 	public boolean validate(Form form) {
 		// TODO Auto-generated method stub
-		String typeCamion = form.getValue("champType");
+		String typeVehicule = form.getValue("champType");
 		String prixJourna = form.getValue("champPrix");
 		String prixCaution = form.getValue("champCaution");
 
-		if (typeCamion.trim().isEmpty()) {
+		if (typeVehicule.trim().isEmpty()) {
 			console.alert("Le type du camion est obligatoire");
 			return false;
 		}

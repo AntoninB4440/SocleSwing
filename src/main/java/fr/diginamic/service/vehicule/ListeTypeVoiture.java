@@ -8,22 +8,22 @@ import javax.persistence.TypedQuery;
 import fr.diginamic.composants.MenuService;
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.ui.TextField;
-import fr.diginamic.dao.vehiculeEntiteDao.TypeCamionDao;
+import fr.diginamic.dao.vehiculeEntiteDao.TypeVoitureDao;
 import fr.diginamic.database.DatabaseAccess;
-import fr.diginamic.entites.vehiculeEntite.TypeCamion;
+import fr.diginamic.entites.vehiculeEntite.TypeVoiture;
 
-public class ListeTypeCamion extends MenuService {
+public class ListeTypeVoiture extends MenuService {
 
 	private EntityManager em = DatabaseAccess.getEntityManager();
 
-	private TypeCamionDao typeCamionDao = new TypeCamionDao();
+	private TypeVoitureDao typeVoitureDao = new TypeVoitureDao();
 
 	@Override
 	public void traitement() {
 		// TODO Auto-generated method stub
 
-		TypedQuery<TypeCamion> query = em.createQuery("SELECT tc from TypeCamion tc", TypeCamion.class);
-		List<TypeCamion> listTypeCamion = query.getResultList();
+		TypedQuery<TypeVoiture> query = em.createQuery("SELECT tv from TypeVoiture tv", TypeVoiture.class);
+		List<TypeVoiture> listTypeVoiture = query.getResultList();
 
 		console.clear();
 		console.print("<h1 class='bg-green'><center>Liste des véhicules</center></h1>");
@@ -31,13 +31,13 @@ public class ListeTypeCamion extends MenuService {
 		String html = "<table class='table' cellspacing=0>"
 				+ "<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type Vehicule</td><td>Prix Journalier (€/J)</td><td>Prix Caution</td></tr>";
 
-		for (TypeCamion tc : listTypeCamion) {
-			html += "<tr>" + "  <td><a class='btn-blue' href='modifier(" + tc.getId()
+		for (TypeVoiture tv : listTypeVoiture) {
+			html += "<tr>" + "  <td><a class='btn-blue' href='modifier(" + tv.getId()
 					+ ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
-					+ " <td><a class='btn-red' href='supprimer(" + tc.getId()
+					+ " <td><a class='btn-red' href='supprimer(" + tv.getId()
 					+ ")'><img width=25 src='images/trash-red-xs.png'></a></td>" + " <td width='150px'>"
-					+ tc.getNomTypeCamion() + "</td>" + " <td width='150px'>" + tc.getPrixJournalierTypeCamion()
-					+ "</td>" + " <td width='150px'>" + tc.getCautionTypeCamion() + "</td>";
+					+ tv.getNomTypeVoiture() + "</td>" + " <td width='150px'>" + tv.getPrixJournalierTypeVoiture()
+					+ "</td>" + " <td width='150px'>" + tv.getCautionTypeVoiture() + "</td>";
 		}
 
 		html += "</table>";
@@ -49,22 +49,22 @@ public class ListeTypeCamion extends MenuService {
 	public void ajouter() {
 		Form form = new Form();
 
-		form.addInput(new TextField("Type de Camion : ", "champType"));
+		form.addInput(new TextField("Type de Voiture : ", "champType"));
 		form.addInput(new TextField("Prix journalier : ", "champPrix"));
 		form.addInput(new TextField("Prix caution : ", "champCaution"));
 
 		ListeTypeVehiculeFormValidator validator = new ListeTypeVehiculeFormValidator();
 
-		boolean valide = console.input("Ajout d'un type de camion", form, validator);
+		boolean valide = console.input("Ajout d'un type de voiture", form, validator);
 
 		if (valide) {
-			String typeCamion = form.getValue("champType");
+			String typeVoiture = form.getValue("champType");
 			String prixJourna = form.getValue("champPrix");
 			String prixCaution = form.getValue("champCaution");
 
-			TypeCamion typeCamionCree = new TypeCamion(typeCamion, Double.parseDouble(prixJourna),
+			TypeVoiture typeVoitureCree = new TypeVoiture(typeVoiture, Double.parseDouble(prixJourna),
 					Double.parseDouble(prixCaution));
-			typeCamionDao.create(typeCamionCree);
+			typeVoitureDao.create(typeVoitureCree);
 
 			traitement();
 
@@ -73,28 +73,28 @@ public class ListeTypeCamion extends MenuService {
 
 	public void modifier(Long id) {
 
-		TypeCamion tc = em.find(TypeCamion.class, id);
+		TypeVoiture tv = em.find(TypeVoiture.class, id);
 
 		// Création du formulaire vide
 		Form form = new Form();
 
 		// On ajoute au formulaire les champs nécessaire
-		form.addInput(new TextField("Type camion : ", "champType", tc.getNomTypeCamion(), false));
+		form.addInput(new TextField("Type camion : ", "champType", tv.getNomTypeVoiture(), false));
 		form.addInput(
-				new TextField("Marque vehicule : ", "champPrix", Double.toString(tc.getPrixJournalierTypeCamion())));
-		form.addInput(new TextField("Immatriculation : ", "champCaution", Double.toString(tc.getCautionTypeCamion())));
+				new TextField("Marque vehicule : ", "champPrix", Double.toString(tv.getPrixJournalierTypeVoiture())));
+		form.addInput(new TextField("Immatriculation : ", "champCaution", Double.toString(tv.getCautionTypeVoiture())));
 
 		ListeTypeVehiculeFormValidator validator = new ListeTypeVehiculeFormValidator();
 
-		boolean valide = console.input("Modification Type Camion : " + tc.getNomTypeCamion(), form, validator);
+		boolean valide = console.input("Modification Type Camion : " + tv.getNomTypeVoiture(), form, validator);
 
 		if (valide) {
 			String prixJourna = form.getValue("champPrix");
 			String prixCaution = form.getValue("champCaution");
-			tc.setPrixJournalierTypeCamion(Double.parseDouble(prixJourna));
-			tc.setCautionTypeCamion(Double.parseDouble(prixCaution));
+			tv.setPrixJournalierTypeVoiture(Double.parseDouble(prixJourna));
+			tv.setCautionTypeVoiture(Double.parseDouble(prixCaution));
 
-			typeCamionDao.update(tc);
+			typeVoitureDao.update(tv);
 
 			traitement();
 
@@ -107,8 +107,8 @@ public class ListeTypeCamion extends MenuService {
 				"Confirmez-vous la suppression de l'item n°" + id);
 		// console.println("" + result);
 		if (result) {
-			TypeCamion typeCamionDelete = typeCamionDao.findById(id);
-			typeCamionDao.delete(typeCamionDelete);
+			TypeVoiture typeCamionDelete = typeVoitureDao.findById(id);
+			typeVoitureDao.delete(typeCamionDelete);
 
 			traitement();
 		}

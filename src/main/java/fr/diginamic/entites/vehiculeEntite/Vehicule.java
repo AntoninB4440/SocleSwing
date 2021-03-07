@@ -68,7 +68,7 @@ public class Vehicule implements IDmodel {
 		super();
 		this.marqueVehicule = marqueVehicule;
 		this.modeleVehicule = modeleVehicule;
-		this.immatriculationVehicule = immatriculationVehicule;
+		this.immatriculationVehicule = immatriculationVehicule.toUpperCase();
 		this.kilometrageVehicule = kilometrageVehicule;
 	}
 

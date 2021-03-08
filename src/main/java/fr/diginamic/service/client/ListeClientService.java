@@ -94,5 +94,9 @@ public class ListeClientService extends MenuService {
 		}
 		
 	}
+	
+	public void modifier(Long id) {
+		
+	}
 
 }

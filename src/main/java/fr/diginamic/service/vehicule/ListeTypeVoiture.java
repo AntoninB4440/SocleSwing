@@ -11,6 +11,7 @@ import fr.diginamic.composants.ui.TextField;
 import fr.diginamic.dao.vehiculeEntiteDao.TypeVoitureDao;
 import fr.diginamic.database.DatabaseAccess;
 import fr.diginamic.entites.vehiculeEntite.TypeVoiture;
+import fr.diginamic.service.vehicule.form.ListeTypeVehiculeFormValidator;
 
 public class ListeTypeVoiture extends MenuService {
 

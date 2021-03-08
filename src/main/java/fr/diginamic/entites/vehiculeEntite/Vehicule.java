@@ -15,13 +15,14 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import fr.diginamic.composants.ui.Selectable;
 import fr.diginamic.dao.IDmodel;
 import fr.diginamic.entites.reservationEntite.Reservation;
 
 @Entity
 @Table(name = "vehicule")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Vehicule implements IDmodel {
+public class Vehicule implements IDmodel, Selectable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,6 +71,11 @@ public class Vehicule implements IDmodel {
 		this.modeleVehicule = modeleVehicule;
 		this.immatriculationVehicule = immatriculationVehicule.toUpperCase();
 		this.kilometrageVehicule = kilometrageVehicule;
+	}
+
+	@Override
+	public String toString() {
+		return immatriculationVehicule;
 	}
 
 	/**

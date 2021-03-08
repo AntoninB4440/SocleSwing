@@ -1,4 +1,4 @@
-package fr.diginamic.service.vehicule;
+package fr.diginamic.service.vehicule.form;
 
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.validator.FormValidator;

@@ -22,7 +22,10 @@ import fr.diginamic.entites.vehiculeEntite.TypeCamion;
 import fr.diginamic.entites.vehiculeEntite.TypeVoiture;
 import fr.diginamic.entites.vehiculeEntite.Vehicule;
 import fr.diginamic.entites.vehiculeEntite.Voiture;
-import fr.diginamic.service.utils.VehiculeUtils.VehiculeUtils;
+import fr.diginamic.service.utils.VehiculeUtils;
+import fr.diginamic.service.vehicule.form.CamionFormValidator;
+import fr.diginamic.service.vehicule.form.ListeVehiculeServiceFormValidator;
+import fr.diginamic.service.vehicule.form.VoitureFormValidator;
 
 public class ListeVehiculeService extends MenuService {
 
@@ -192,7 +195,7 @@ public class ListeVehiculeService extends MenuService {
 		// Création du formulaire vide
 		Form form = new Form();
 
-		// On ajoute au formulaire les champs nécessaire
+		// On ajoute au formulaire les champs nécessaire si la liste des réservation est vide
 		if (v.getReservationVehicule().isEmpty()) {
 			form.addInput(new TextField("Marque vehicule : ", "champMarque", v.getMarqueVehicule(), false));
 			form.addInput(new TextField("Marque vehicule : ", "champModele", v.getModeleVehicule(), false));

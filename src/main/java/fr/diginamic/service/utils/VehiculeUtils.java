@@ -1,4 +1,4 @@
-package fr.diginamic.service.utils.VehiculeUtils;
+package fr.diginamic.service.utils;
 
 import fr.diginamic.composants.ui.Selectable;
 

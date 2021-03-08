@@ -19,7 +19,7 @@ public class Adresse {
 	private String villeAdresse;
 
 	@Column(name = "telephone_adresse", length = 10, nullable = false)
-	private int telephoneAdresse;
+	private String telephoneAdresse;
 
 	@Column(name = "email_adresse", length = 255, nullable = false, unique = true)
 	private String emailAdresse;
@@ -40,7 +40,7 @@ public class Adresse {
 	 * @param emailAdresse
 	 */
 	public Adresse(Short numeroAdresse, String rueAdresse, Integer codePostalAdresse, String villeAdresse,
-			int telephoneAdresse, String emailAdresse) {
+			String telephoneAdresse, String emailAdresse) {
 		super();
 		this.numeroAdresse = numeroAdresse;
 		this.rueAdresse = rueAdresse;
@@ -109,14 +109,14 @@ public class Adresse {
 	/**
 	 * @return the telephoneAdresse
 	 */
-	public int getTelephoneAdresse() {
+	public String getTelephoneAdresse() {
 		return telephoneAdresse;
 	}
 
 	/**
 	 * @param telephoneAdresse the telephoneAdresse to set
 	 */
-	public void setTelephoneAdresse(int telephoneAdresse) {
+	public void setTelephoneAdresse(String telephoneAdresse) {
 		this.telephoneAdresse = telephoneAdresse;
 	}
 

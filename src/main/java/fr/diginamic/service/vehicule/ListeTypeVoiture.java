@@ -2,19 +2,14 @@ package fr.diginamic.service.vehicule;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import fr.diginamic.composants.MenuService;
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.ui.TextField;
 import fr.diginamic.dao.vehiculeEntiteDao.TypeVoitureDao;
-import fr.diginamic.database.DatabaseAccess;
 import fr.diginamic.entites.vehiculeEntite.TypeVoiture;
 import fr.diginamic.service.vehicule.form.ListeTypeVehiculeFormValidator;
 
 public class ListeTypeVoiture extends MenuService {
-
-	private EntityManager em = DatabaseAccess.getEntityManager();
 
 	private TypeVoitureDao typeVoitureDao = new TypeVoitureDao();
 

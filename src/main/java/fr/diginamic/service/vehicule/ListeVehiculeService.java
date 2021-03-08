@@ -29,8 +29,6 @@ import fr.diginamic.service.vehicule.form.VoitureFormValidator;
 
 public class ListeVehiculeService extends MenuService {
 
-	private EntityManager em = DatabaseAccess.getEntityManager();
-
 	private VehiculeDao vehiculeDao = new VehiculeDao();
 	private VoitureDao voitureDao = new VoitureDao();
 	private CamionDao camionDao = new CamionDao();
@@ -64,7 +62,7 @@ public class ListeVehiculeService extends MenuService {
 				Voiture v = (Voiture) vehicule;
 				html += "<tr> "
 						+ "	<td><a class='btn-blue' href='modifier(" + v.getId() + ")'<img width=25 src ='images/pencil-blue-xs.png'></a></td>"
-						+ " <td><a class='btn-red' href='modifier(" + v.getId() + ")'<img width=25 src ='images/trash-red-xs.png'></a></td>"
+						+ " <td><a class='btn-red' href='supprimer(" + v.getId() + ")'<img width=25 src ='images/trash-red-xs.png'></a></td>"
 						+ " <td width='150px'>" + v.getMarqueVehicule() + "</td>"
 						+ " <td width='150px'>" + v.getModeleVehicule() + "</td>"
 						+ " <td width='150px'>" + v.getKilometrageVehicule() + "</td>"
@@ -76,7 +74,7 @@ public class ListeVehiculeService extends MenuService {
 				Camion c = (Camion) vehicule;
 				html += "<tr> "
 						+ "	<td><a class='btn-blue' href='modifier(" + c.getId() + ")'<img width=25 src ='images/pencil-blue-xs.png'></a></td>"
-						+ " <td><a class='btn-red' href='modifier(" + c.getId() + ")'<img width=25 src ='images/trash-red-xs.png'></a></td>"
+						+ " <td><a class='btn-red' href='supprimer(" + c.getId() + ")'<img width=25 src ='images/trash-red-xs.png'></a></td>"
 						+ " <td width='150px'>" + c.getMarqueVehicule() + "</td>"
 						+ " <td width='150px'>" + c.getModeleVehicule() + "</td>"
 						+ " <td width='150px'>" + c.getKilometrageVehicule() + "</td>"

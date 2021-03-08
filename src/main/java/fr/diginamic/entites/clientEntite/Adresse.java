@@ -18,7 +18,7 @@ public class Adresse {
 	@Column(name = "ville_adresse", length = 255, nullable = false)
 	private String villeAdresse;
 
-	@Column(name = "telephone_adresse", length = 10, nullable = false)
+	@Column(name = "telephone_adresse", length = 255, nullable = false)
 	private String telephoneAdresse;
 
 	@Column(name = "email_adresse", length = 255, nullable = false, unique = true)

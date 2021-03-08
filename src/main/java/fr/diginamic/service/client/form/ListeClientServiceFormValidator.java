@@ -2,11 +2,8 @@ package fr.diginamic.service.client.form;
 
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.validator.FormValidator;
-import fr.diginamic.dao.clientEntiteDao.ClientDao;
 
 public class ListeClientServiceFormValidator extends FormValidator {
-
-	private ClientDao clientDao = new ClientDao();
 
 	@Override
 	public boolean validate(Form form) {
@@ -49,10 +46,6 @@ public class ListeClientServiceFormValidator extends FormValidator {
 		}
 		if (!emailClient.toLowerCase().matches("^[\\w]+(?:.[\\w]+)*@(?:[a-zA-Z0-9-]+.)+[a-zA-Z]{2,6}$")) {
 			console.alert("L'email doit être au format xxxxxxx@xxxx.xxx");
-			return false;
-		}
-		if (!clientDao.findByEmail(emailClient).isEmpty()) {
-			console.alert("Cette adresse mail est déjà utilisée, veuillez en choisir une autre");
 			return false;
 		}
 

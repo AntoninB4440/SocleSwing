@@ -1,5 +1,7 @@
 package fr.diginamic.entites.clientEntite;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -25,7 +27,7 @@ public class Permis implements IDmodel {
 	private int numeroPermis;
 
 	@Column(name = "date_obtention_permis", nullable = false)
-	private int dateObtentionPermis;
+	private LocalDate dateObtentionPermis;
 
 	@Column(name = "type_permis", nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -46,7 +48,7 @@ public class Permis implements IDmodel {
 	 * @param dateObtentionPermis
 	 * @param typePermis
 	 */
-	public Permis(int numeroPermis, int dateObtentionPermis, String typePermis, Client client) {
+	public Permis(int numeroPermis, LocalDate dateObtentionPermis, String typePermis, Client client) {
 		super();
 		this.numeroPermis = numeroPermis;
 		this.dateObtentionPermis = dateObtentionPermis;
@@ -85,14 +87,14 @@ public class Permis implements IDmodel {
 	/**
 	 * @return the dateObtentionPermis
 	 */
-	public int getDateObtentionPermis() {
+	public LocalDate getDateObtentionPermis() {
 		return dateObtentionPermis;
 	}
 
 	/**
 	 * @param dateObtentionPermis the dateObtentionPermis to set
 	 */
-	public void setDateObtentionPermis(int dateObtentionPermis) {
+	public void setDateObtentionPermis(LocalDate dateObtentionPermis) {
 		this.dateObtentionPermis = dateObtentionPermis;
 	}
 

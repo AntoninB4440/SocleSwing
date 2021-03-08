@@ -41,8 +41,8 @@ public class ListeVehiculeService extends MenuService {
 	public void traitement() {
 		// TODO Auto-generated method stub
 
-		TypedQuery<Vehicule> query = em.createQuery("SELECT v from Vehicule v", Vehicule.class);
-		List<Vehicule> vehicules = query.getResultList();
+		
+		List<Vehicule> vehicules = vehiculeDao.findAll();
 
 		console.clear();
 		console.print("<h1 class='bg-green'><center>Liste des véhicules</center></h1>");
@@ -118,8 +118,7 @@ public class ListeVehiculeService extends MenuService {
 
 			form2.addInput(new TextField("Nombre de place :", "champNbPlace"));
 
-			TypedQuery<TypeVoiture> query = em.createQuery("SELECT tv from TypeVoiture tv", TypeVoiture.class);
-			List<TypeVoiture> listTypeVoitures = query.getResultList();
+			List<TypeVoiture> listTypeVoitures = typeVoitureDao.findAll();
 
 			List<Selectable> typeVoiture = new ArrayList<>();
 			for (TypeVoiture listTypeVoiture : listTypeVoitures) {
@@ -155,8 +154,7 @@ public class ListeVehiculeService extends MenuService {
 
 			form2.addInput(new TextField("Volume du camion :", "champVolume"));
 
-			TypedQuery<TypeCamion> query = em.createQuery("SELECT tc from TypeCamion tc", TypeCamion.class);
-			List<TypeCamion> listTypeCamions = query.getResultList();
+			List<TypeCamion> listTypeCamions = typeCamionDao.findAll();
 
 			List<Selectable> typeCamion = new ArrayList<>();
 			for (TypeCamion listTypeCamion : listTypeCamions) {
@@ -190,7 +188,7 @@ public class ListeVehiculeService extends MenuService {
 
 	public void modifier(Long id) {
 
-		Vehicule v = em.find(Vehicule.class, id);
+		Vehicule v = vehiculeDao.findById(id);
 
 		// Création du formulaire vide
 		Form form = new Form();

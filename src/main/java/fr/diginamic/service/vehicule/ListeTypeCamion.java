@@ -3,7 +3,6 @@ package fr.diginamic.service.vehicule;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 
 import fr.diginamic.composants.MenuService;
 import fr.diginamic.composants.ui.Form;
@@ -23,8 +22,7 @@ public class ListeTypeCamion extends MenuService {
 	public void traitement() {
 		// TODO Auto-generated method stub
 
-		TypedQuery<TypeCamion> query = em.createQuery("SELECT tc from TypeCamion tc", TypeCamion.class);
-		List<TypeCamion> listTypeCamion = query.getResultList();
+		List<TypeCamion> listTypeCamion = typeCamionDao.findAll();
 
 		console.clear();
 		console.print("<h1 class='bg-green'><center>Liste des véhicules</center></h1>");
@@ -74,7 +72,7 @@ public class ListeTypeCamion extends MenuService {
 
 	public void modifier(Long id) {
 
-		TypeCamion tc = em.find(TypeCamion.class, id);
+		TypeCamion tc = typeCamionDao.findById(id);
 
 		// Création du formulaire vide
 		Form form = new Form();

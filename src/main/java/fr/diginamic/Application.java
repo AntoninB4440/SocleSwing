@@ -1,6 +1,7 @@
 package fr.diginamic;
 
 import fr.diginamic.composants.AbstractApplication;
+import fr.diginamic.service.client.ListeClientService;
 import fr.diginamic.service.vehicule.ListeMaintenanceService;
 import fr.diginamic.service.vehicule.ListeTypeCamion;
 import fr.diginamic.service.vehicule.ListeTypeVoiture;
@@ -49,7 +50,7 @@ public class Application extends AbstractApplication {
 
 		addMenuOption(1, "Aide", new AideService());
 
-		addMenuOption(2, "Liste des clients", new AideService());
+		addMenuOption(2, "Liste des clients", new ListeClientService());
 
 		addMenuOption(3, "Exemple 1 - Titres", new Exemple1Service());
 		addMenuOption(3, "Exemple 2 - Textes de couleur", new Exemple2Service());

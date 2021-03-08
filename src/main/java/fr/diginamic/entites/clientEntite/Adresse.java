@@ -7,13 +7,13 @@ import javax.persistence.Embeddable;
 public class Adresse {
 
 	@Column(name = "numero_adresse", nullable = false)
-	private Short numeroAdresse;
+	private String numeroAdresse;
 
 	@Column(name = "rue_adresse", length = 255, nullable = false)
 	private String rueAdresse;
 
 	@Column(name = "code_postal_adresse", nullable = false)
-	private Integer codePostalAdresse;
+	private String codePostalAdresse;
 
 	@Column(name = "ville_adresse", length = 255, nullable = false)
 	private String villeAdresse;
@@ -39,7 +39,7 @@ public class Adresse {
 	 * @param telephoneAdresse
 	 * @param emailAdresse
 	 */
-	public Adresse(Short numeroAdresse, String rueAdresse, Integer codePostalAdresse, String villeAdresse,
+	public Adresse(String numeroAdresse, String rueAdresse, String codePostalAdresse, String villeAdresse,
 			String telephoneAdresse, String emailAdresse) {
 		super();
 		this.numeroAdresse = numeroAdresse;
@@ -50,17 +50,22 @@ public class Adresse {
 		this.emailAdresse = emailAdresse;
 	}
 
+	@Override
+	public String toString() {
+		return numeroAdresse + " " + rueAdresse + " " + codePostalAdresse + " " + villeAdresse;
+	}
+
 	/**
 	 * @return the numeroAdresse
 	 */
-	public Short getNumeroAdresse() {
+	public String getNumeroAdresse() {
 		return numeroAdresse;
 	}
 
 	/**
 	 * @param numeroAdresse the numeroAdresse to set
 	 */
-	public void setNumeroAdresse(Short numeroAdresse) {
+	public void setNumeroAdresse(String numeroAdresse) {
 		this.numeroAdresse = numeroAdresse;
 	}
 
@@ -81,14 +86,14 @@ public class Adresse {
 	/**
 	 * @return the codePostalAdresse
 	 */
-	public Integer getCodePostalAdresse() {
+	public String getCodePostalAdresse() {
 		return codePostalAdresse;
 	}
 
 	/**
 	 * @param codePostalAdresse the codePostalAdresse to set
 	 */
-	public void setCodePostalAdresse(Integer codePostalAdresse) {
+	public void setCodePostalAdresse(String codePostalAdresse) {
 		this.codePostalAdresse = codePostalAdresse;
 	}
 

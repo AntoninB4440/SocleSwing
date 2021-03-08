@@ -1,24 +1,19 @@
 package fr.diginamic.service.client;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import fr.diginamic.composants.MenuService;
-import fr.diginamic.composants.ui.ComboBox;
+
 import fr.diginamic.composants.ui.Form;
-import fr.diginamic.composants.ui.Selectable;
+
 import fr.diginamic.composants.ui.TextField;
 import fr.diginamic.dao.clientEntiteDao.ClientDao;
+import fr.diginamic.entites.clientEntite.Adresse;
 import fr.diginamic.entites.clientEntite.Client;
-import fr.diginamic.entites.vehiculeEntite.Camion;
-import fr.diginamic.entites.vehiculeEntite.TypeCamion;
-import fr.diginamic.entites.vehiculeEntite.TypeVoiture;
-import fr.diginamic.entites.vehiculeEntite.Vehicule;
-import fr.diginamic.entites.vehiculeEntite.Voiture;
-import fr.diginamic.service.utils.VehiculeUtils;
-import fr.diginamic.service.vehicule.form.CamionFormValidator;
-import fr.diginamic.service.vehicule.form.ListeVehiculeServiceFormValidator;
-import fr.diginamic.service.vehicule.form.VoitureFormValidator;
+
+import fr.diginamic.service.client.form.ListeClientServiceFormValidator;
+
 
 public class ListeClientService extends MenuService {
 
@@ -34,13 +29,14 @@ public class ListeClientService extends MenuService {
 		console.print("<h1 class='bg-yellow'><center>Liste des clients</center></h1>");
 
 		String html = "<table class='table' cellspacing=0>"
-				+ "<tr class='bg-green'>"
+				+ "<tr class='bg-yellow'>"
 				+ "		<td>&nbsp;</td>"
 				+ "		<td>&nbsp;</td>"
 				+ "		<td>Nom</td>"
 				+ "		<td>Prenom</td>"
 				+ "		<td>Adresse</td>"
-				+ "		<td>Permis</td>"
+				+ "		<td>Téléphone</td>"
+				+ "		<td>Email</td>"
 				+ "</tr>";
 
 		for (Client client : listeClients) {
@@ -50,7 +46,8 @@ public class ListeClientService extends MenuService {
 						+ " <td width='150px'>" + client.getNomClient() + "</td>"
 						+ " <td width='150px'>" + client.getPrenomClient() + "</td>"
 						+ " <td width='150px'>" + client.getAdresseClient() + "</td>"
-						+ " <td width='150px'>" + client.getPermisClient().getTypePermis() + "</td>"
+						+ " <td width='150px'>" + client.getAdresseClient().getTelephoneAdresse() + "</td>"
+						+ " <td width='150px'>" + client.getAdresseClient().getEmailAdresse() + "</td>"
 					+ "</tr>";
 		}
 
@@ -64,7 +61,7 @@ public class ListeClientService extends MenuService {
 		Form form = new Form();
 
 		form.addInput(new TextField("Nom : ", "champNom"));
-		form.addInput(new TextField("Prenom : ", "champModele"));
+		form.addInput(new TextField("Prenom : ", "champPrenom"));
 		form.addInput(new TextField("N° rue : ", "champNumeroRue"));
 		form.addInput(new TextField("rue : ", "champRue"));
 		form.addInput(new TextField("Code Postal : ", "champCodePostal"));
@@ -72,7 +69,29 @@ public class ListeClientService extends MenuService {
 		form.addInput(new TextField("Téléphone : ", "champTelephone"));
 		form.addInput(new TextField("Email : ", "champEmail"));
 
-
+		ListeClientServiceFormValidator validator = new ListeClientServiceFormValidator();
+		
+		boolean valide = console.input("Ajout d'un client", form, validator);
+		
+		if(valide) {
+			String nomClient = form.getValue("champNom");
+			String prenomClient = form.getValue("champPrenom");
+			String numeroRueClient = form.getValue("champNumeroRue");
+			String rueClient = form.getValue("champRue");
+			String codePostalClient = form.getValue("champCodePostal");
+			String villeClient = form.getValue("champVille");
+			String telephoneClient = form.getValue("champTelephone");
+			String emailClient = form.getValue("champEmail");
+			
+			Adresse adresseClient = new Adresse(numeroRueClient, rueClient, codePostalClient, villeClient, telephoneClient, emailClient);
+			
+			Client clientCree = new Client(nomClient, prenomClient, adresseClient);
+			
+			clientDao.create(clientCree);
+			
+			traitement();
+			
+		}
 		
 	}
 

@@ -135,6 +135,7 @@ public class ListeVehiculeService extends MenuService {
 				String immatriculation = form.getValue("champImma");
 				int kilometrageVoiture = Integer.parseInt(form.getValue("champKilo"));
 				Short nombrePlace = Short.parseShort(form2.getValue("champNbPlace"));
+				System.out.println(form2.getValue("typeVoiture"));
 				TypeVoiture typeVoitureCree = typeVoitureDao.findById(Long.parseLong(form2.getValue("typeVoiture")));
 
 				Voiture voitureCree = new Voiture(marqueVoiture, modeleVoiture, immatriculation, kilometrageVoiture,

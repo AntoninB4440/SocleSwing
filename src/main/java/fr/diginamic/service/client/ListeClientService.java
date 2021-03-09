@@ -1,8 +1,12 @@
 package fr.diginamic.service.client;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.opencsv.CSVWriter;
 
 import fr.diginamic.composants.MenuService;
 import fr.diginamic.composants.ui.ComboBox;
@@ -68,6 +72,7 @@ public class ListeClientService extends MenuService {
 
 		html += "</table>";
 		html += "<a class='btn-blue' href='ajouter()'><img width=30 src='images/plus-blue.png'></a>";
+		html += "<a class='btn-green' href='exportCSV()'><img width=30 src='images/file-green.png'></a>";
 
 		console.print(html);
 	}
@@ -208,6 +213,40 @@ public class ListeClientService extends MenuService {
 			traitement();
 
 		}
+	}
+
+	public void exportCSV() {
+
+		List<Client> listeClient = clientDao.findAll();
+		List<String[]> stringCSV = new ArrayList<>();
+
+		try {
+			CSVWriter writer = new CSVWriter(new FileWriter(
+					"C:\\SpringProject\\SocleSwing\\src\\main\\resources\\EXPORT\\EXCEL\\exportClient.csv"));
+			String[] header = { "id", "Nom", "Prenom", "Adresse", "Telephone", "Email", "TypePermis",
+					"Date Obtention" };
+			stringCSV.add(header);
+
+			for (Client client : listeClient) {
+				String[] clientLu = { Long.toString(client.getId()), client.getNomClient(), client.getPrenomClient(),
+						client.getAdresseClient().getNumeroAdresse() + " " + client.getAdresseClient().getRueAdresse()
+								+ " " + client.getAdresseClient().getCodePostalAdresse() + " "
+								+ client.getAdresseClient().getVilleAdresse(),
+						client.getAdresseClient().getTelephoneAdresse(), client.getAdresseClient().getEmailAdresse(),
+						client.getPermisClient().getTypePermis().getType(),
+						client.getPermisClient().getDateObtentionPermis().toString() };
+
+				stringCSV.add(clientLu);
+			}
+			writer.writeAll(stringCSV);
+			// NE PAS OUBLIER LE FLUSH (vidage de la mémoire tampon)
+			writer.flush();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
+
 	}
 
 }

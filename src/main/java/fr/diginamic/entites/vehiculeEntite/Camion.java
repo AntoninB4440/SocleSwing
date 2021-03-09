@@ -29,6 +29,12 @@ public class Camion extends Vehicule {
 		this.volumeCamion = volumeCamion;
 	}
 
+	@Override
+	public String toCSV() {
+		// TODO Auto-generated method stub
+		return this.typeCamion.getNomTypeCamion();
+	}
+
 	/**
 	 * @return the volumeCamion
 	 */

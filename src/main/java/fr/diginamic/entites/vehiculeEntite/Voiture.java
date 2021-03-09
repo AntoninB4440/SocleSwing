@@ -29,6 +29,12 @@ public class Voiture extends Vehicule {
 		this.nombrePlaceVoiture = nombrePlaceVoiture;
 	}
 
+	@Override
+	public String toCSV() {
+		// TODO Auto-generated method stub
+		return this.typeVoiture.getNomTypeVoiture();
+	}
+
 	/**
 	 * @return the nombrePlaceVoiture
 	 */

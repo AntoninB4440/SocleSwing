@@ -22,7 +22,7 @@ import fr.diginamic.entites.reservationEntite.Reservation;
 @Entity
 @Table(name = "vehicule")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Vehicule implements IDmodel, Selectable {
+public abstract class Vehicule implements IDmodel, Selectable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,6 +72,8 @@ public class Vehicule implements IDmodel, Selectable {
 		this.immatriculationVehicule = immatriculationVehicule.toUpperCase();
 		this.kilometrageVehicule = kilometrageVehicule;
 	}
+
+	public abstract String toCSV();
 
 	@Override
 	public String toString() {

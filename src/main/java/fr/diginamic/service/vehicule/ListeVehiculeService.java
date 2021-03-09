@@ -1,10 +1,14 @@
 package fr.diginamic.service.vehicule;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
+import com.opencsv.CSVWriter;
 
 import fr.diginamic.composants.MenuService;
 import fr.diginamic.composants.ui.ComboBox;
@@ -17,6 +21,7 @@ import fr.diginamic.dao.vehiculeEntiteDao.TypeVoitureDao;
 import fr.diginamic.dao.vehiculeEntiteDao.VehiculeDao;
 import fr.diginamic.dao.vehiculeEntiteDao.VoitureDao;
 import fr.diginamic.database.DatabaseAccess;
+import fr.diginamic.entites.clientEntite.Client;
 import fr.diginamic.entites.vehiculeEntite.Camion;
 import fr.diginamic.entites.vehiculeEntite.TypeCamion;
 import fr.diginamic.entites.vehiculeEntite.TypeVoiture;
@@ -87,6 +92,7 @@ public class ListeVehiculeService extends MenuService {
 
 		html += "</table>";
 		html += "<a class='btn-blue' href='ajouter()'><img width=30 src='images/plus-blue.png'></a>";
+		html += "<a class='btn-green' href='exportCSV()'><img width=30 src='images/file-green.png'></a>";
 
 		console.print(html);
 	}
@@ -227,6 +233,37 @@ public class ListeVehiculeService extends MenuService {
 
 			traitement();
 		}
+	}
+	
+	public void exportCSV() {
+
+		List<Vehicule> listeVehicule = vehiculeDao.findAll();
+		List<String[]> stringCSV = new ArrayList<>();
+
+		try {
+			CSVWriter writer = new CSVWriter(new FileWriter(
+					"C:\\SpringProject\\SocleSwing\\src\\main\\resources\\EXPORT\\EXCEL\\exportVehicule.csv"));
+			String[] header = { "id", "Marque", "Modele", "Immatriculation", "kilometrage", "Statut", "TypeVehicule"};
+			stringCSV.add(header);
+
+			for (Vehicule vehiculeLu : listeVehicule) {
+				String[] vehicule = {Long.toString(vehiculeLu.getId()), vehiculeLu.getMarqueVehicule(), vehiculeLu.getModeleVehicule(), vehiculeLu.getImmatriculationVehicule(), 
+					Integer.toString(vehiculeLu.getKilometrageVehicule()),
+					vehiculeLu.getStatutVehicule().getStatut(),
+					vehiculeLu.toCSV()
+				};
+
+				stringCSV.add(vehicule);
+			}
+			writer.writeAll(stringCSV);
+			// NE PAS OUBLIER LE FLUSH (vidage de la mémoire tampon)
+			writer.flush();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
+
 	}
 
 }

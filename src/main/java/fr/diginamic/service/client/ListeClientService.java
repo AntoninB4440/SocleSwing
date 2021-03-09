@@ -1,18 +1,29 @@
 package fr.diginamic.service.client;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.diginamic.composants.MenuService;
+import fr.diginamic.composants.ui.ComboBox;
+import fr.diginamic.composants.ui.DateField;
 import fr.diginamic.composants.ui.Form;
+import fr.diginamic.composants.ui.Selectable;
 import fr.diginamic.composants.ui.TextField;
 import fr.diginamic.dao.clientEntiteDao.ClientDao;
+import fr.diginamic.dao.clientEntiteDao.PermisDao;
 import fr.diginamic.entites.clientEntite.Adresse;
 import fr.diginamic.entites.clientEntite.Client;
+import fr.diginamic.entites.clientEntite.Permis;
+import fr.diginamic.entites.clientEntite.TypePermis;
 import fr.diginamic.service.client.form.ListeClientServiceFormValidator;
+import fr.diginamic.service.client.form.PermisFormValidator;
+import fr.diginamic.service.utils.DateUtils;
 
 public class ListeClientService extends MenuService {
 
 	private ClientDao clientDao = new ClientDao();
+	private PermisDao permisDao = new PermisDao();
 
 	@Override
 	public void traitement() {
@@ -158,13 +169,45 @@ public class ListeClientService extends MenuService {
 	}
 
 	public void ajouterPermis(Long id) {
+
 		Client c = clientDao.findById(id);
 
 		Form form = new Form();
 
 		form.addInput(new TextField("Numéro du permis : ", "champNumeroPermis"));
-		form.addInput(new TextField("Date Obtention Permis : ", "champDateObtention"));
+		form.addInput(new DateField("Date d'obtention : ", "champDateObtention"));
 
+		List<Selectable> ListTypePermis = new ArrayList<>();
+		TypePermis[] listePermis = TypePermis.values();
+		for (TypePermis typePermis : listePermis) {
+			ListTypePermis.add(typePermis);
+		}
+
+		form.addInput(
+				new ComboBox("Liste des types de permis :", "listePermis", ListTypePermis, ListTypePermis.get(0)));
+
+		PermisFormValidator validator = new PermisFormValidator();
+
+		boolean valide = console.input("Ajout d'un permis ", form, validator);
+
+		if (valide) {
+			String numeroPermis = form.getValue("champNumeroPermis");
+			String dateObtentionPermis = form.getValue("champDateObtention");
+			LocalDate dateObtention = DateUtils.parseLocal(dateObtentionPermis);
+
+			TypePermis typePermisObtenu = TypePermis.findById(Long.parseLong(form.getValue("listePermis")));
+
+			Permis permisClient = new Permis(numeroPermis, dateObtention, typePermisObtenu, c);
+
+			permisDao.create(permisClient);
+
+			c.setPermisClient(permisClient);
+
+			clientDao.update(c);
+
+			traitement();
+
+		}
 	}
 
 }

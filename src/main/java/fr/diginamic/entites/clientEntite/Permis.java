@@ -24,7 +24,7 @@ public class Permis implements IDmodel {
 	private Long id;
 
 	@Column(name = "numero_permis", nullable = false)
-	private int numeroPermis;
+	private String numeroPermis;
 
 	@Column(name = "date_obtention_permis", nullable = false)
 	private LocalDate dateObtentionPermis;
@@ -48,11 +48,11 @@ public class Permis implements IDmodel {
 	 * @param dateObtentionPermis
 	 * @param typePermis
 	 */
-	public Permis(int numeroPermis, LocalDate dateObtentionPermis, String typePermis, Client client) {
+	public Permis(String numeroPermis, LocalDate dateObtentionPermis, TypePermis typePermis, Client client) {
 		super();
 		this.numeroPermis = numeroPermis;
 		this.dateObtentionPermis = dateObtentionPermis;
-		this.typePermis = TypePermis.find(typePermis);
+		this.typePermis = typePermis;
 		this.client = client;
 	}
 
@@ -73,14 +73,14 @@ public class Permis implements IDmodel {
 	/**
 	 * @return the numeroPermis
 	 */
-	public int getNumeroPermis() {
+	public String getNumeroPermis() {
 		return numeroPermis;
 	}
 
 	/**
 	 * @param numeroPermis the numeroPermis to set
 	 */
-	public void setNumeroPermis(int numeroPermis) {
+	public void setNumeroPermis(String numeroPermis) {
 		this.numeroPermis = numeroPermis;
 	}
 
